@@ -125,4 +125,34 @@ public class PortoDAO {
 			throw new RuntimeException("Errore Db");
 		}		
 	}
+
+	public Paper getVertice(Author a1, Author a2) {
+		final String sql = "SELECT p.eprintid, p.title, p.issn, p.publication, p.type, p.types " + 
+							"FROM creator c1, creator c2, paper p " + 
+							"WHERE c1.eprintid=c2.eprintid " + 
+							"AND p.eprintid=c1.eprintid " + 
+							"AND c1.authorid=? AND c2.authorid=? " + 
+							"limit 1";
+		Paper paper = null;
+
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, a1.getId());
+			st.setInt(2, a2.getId());
+
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {				
+				paper = new Paper(rs.getInt("p.eprintid"), rs.getString("p.title"), rs.getString("p.issn"), rs.getString("p.publication"), rs.getString("p.type"), rs.getString("p.types")) ;
+			}
+
+			conn.close();
+			return paper;
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			throw new RuntimeException("Errore Db");
+		}
+	}
 }

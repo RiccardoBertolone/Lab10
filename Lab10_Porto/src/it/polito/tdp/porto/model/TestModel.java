@@ -16,10 +16,19 @@ public class TestModel {
 //			System.out.println(v);
 //		}
 		
-		Author a = model.mappaAutori.get(719);
-		List<Author> coautori = model.getCoautori(a) ;
-		for (Author a2 : coautori) {
-			System.out.println(a2);
+//		Author a = model.mappaAutori.get(719);
+//		List<Author> coautori = model.getCoautori(a) ;
+//		for (Author a2 : coautori) {
+//			System.out.println(a2);
+//		}
+		
+		Author a1 = model.mappaAutori.get(23099) ;
+		Author a2 = model.mappaAutori.get(29770) ;
+		List<Paper> papers = model.getPapers1(a1, a2) ;
+		if (papers.size()==0)
+			System.out.println("No connessioni");
+		for (Paper p : papers) {
+			System.out.println(p);
 		}
 		
 	}

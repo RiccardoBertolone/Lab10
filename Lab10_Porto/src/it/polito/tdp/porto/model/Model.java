@@ -73,7 +73,25 @@ public class Model {
 		ShortestPathAlgorithm<Author,DefaultEdge> spa = new DijkstraShortestPath<Author, DefaultEdge>(grafo);
 		GraphPath<Author,DefaultEdge> gp = spa.getPath(a1, a2);
 		
+		if (gp == null)
+			return new LinkedList<Paper>() ;
+		
 		//List<DefaultEdge> vertici = spa.getPath(a1, a2).getEdgeList();
+		List<Author> camminoMinimo = gp.getVertexList();
+		List<Paper> papers = new LinkedList<>() ;
+		if (camminoMinimo.size()<2) {
+			return papers ;
+		}
+		for (int i = 0; i<camminoMinimo.size()-1; i++) {
+			papers.add(dao.getVertice(camminoMinimo.get(i), camminoMinimo.get(i+1))) ;
+		}
+		return papers;
+	}
+
+
+
+	public List<Paper> getPapers2(Author a1, Author a2) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

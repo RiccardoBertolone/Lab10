@@ -74,7 +74,7 @@ public class PortoController {
     	txtResult.setText("Sequenza di papers che collega "+a1+" e "+a2+" :\n");
     	List<Paper> articoli = model.getPapers1(a1, a2) ;
     	for (Paper p : articoli) {
-    		txtResult.appendText(p.toString());
+    		txtResult.appendText(p.toString()+"\n");
     	}
 
     }
